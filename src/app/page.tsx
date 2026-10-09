@@ -35,7 +35,7 @@ export default async function Home() {
   console.log(todayPriceDecrase);
 
   return (
-    <div className="bg-[#E1E8E1] px-5 pt-5">
+    <div className="bg-[#E1E8E1] px-5 pt-5 pb-5">
       <section>
         <Hero />
       </section>

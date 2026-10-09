@@ -33,7 +33,7 @@ const CategoryPage = async ({ params }: Promise<string | number>) => {
         <Suspense fallback="<h1> Loading .... </h1>">
           <div>
             <div className="flex items-center bg-white rounded-xl border my-5 border-gray-200 py-5 px-3">
-              <p className="text-5xl">{categoreisproducts[0].categoryIcon}</p>
+              <p className="text-5xl">{categoreisproducts[0]?.categoryIcon}</p>
               <div>
                 <h2 className="text-xl font-bold">
                   {categoreisproducts[0].categoryNameBn}
