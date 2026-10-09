@@ -2,19 +2,32 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <div className="w-screen h-[calc(100vh-160px)] flex justify-center items-center bg-[#E1E8E1]">
       <div>
-        <h1 className="text-3xl font-bold text-center">সাইন ইন</h1>
+        <h1 className="text-3xl font-bold text-center">অ্যাকাউন্ট তৈরি করুন</h1>
         <p className="text-base mt-3 text-center mb-5">
-          বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
+          বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
         </p>
 
         <form
           action=""
           className="bg-white p-10 max-w-5xl rounded-lg border border-gray-300"
         >
+          <div className="flex flex-col mb-5">
+            <label htmlFor="name" className="text-lg mb-1">
+              নাম
+            </label>
+            <input
+              className="border border-gray-400 rounded-md p-1 outline-0"
+              type="text"
+              placeholder="যেমন: রহিম উদ্দিন"
+              name="name"
+              id="name"
+            />
+          </div>
+
           <div className="flex flex-col mb-5">
             <label htmlFor="email" className="text-lg mb-1">
               ইমেইল
@@ -39,12 +52,24 @@ const LoginPage = () => {
               id="password"
             />
           </div>
+          <div className="flex flex-col mb-5">
+            <label htmlFor="confirmPassword" className="text-lg mb-1">
+              পাসওয়ার্ড নিশ্চিত করুন
+            </label>
+            <input
+              className="border border-gray-400 rounded-md p-1 outline-0"
+              type="password"
+              placeholder="আবার লিখুন"
+              name="confirmPassword"
+              id="confirmPassword"
+            />
+          </div>
           <button
             type="submit"
             className="bg-green-800 text-base font-medium block w-full mb-5 text-white rounded-md px-5 py-2 shadow-md
               shadow-green-500 cursor-pointer"
           >
-            সাইন আপ
+            অ্যাকাউন্ট তৈরি করুন
           </button>
           <p className="text-center relative my-3">
             অথবা
@@ -75,9 +100,9 @@ const LoginPage = () => {
           </div>
 
           <p className="text-center text-base mt-5">
-            অ্যাকাউন্ট নেই?
-            <Link className="text-green-800" href="create-account">
-              সাইন আপ করুন
+            অ্যাকাউন্ট আছে?
+            <Link className="text-green-800" href="/login">
+              সাইন ইন করুন
             </Link>
           </p>
         </form>
@@ -89,4 +114,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
