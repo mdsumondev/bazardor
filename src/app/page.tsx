@@ -9,7 +9,7 @@ import CategoryProduct from "./Components/Categories/CategoryProduct";
 const allProductsData = async (): promises<ProductType[]> => {
   try {
     const res = await fetch(
-      "https://api.api-store.workers.dev/api/bazardor/products",
+      "https://openapi.programming-hero.com/api/bazardor/products",
     );
     if (res.ok) {
       const productData = await res.json();

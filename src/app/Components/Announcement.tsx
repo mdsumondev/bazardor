@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 const loadAnnouncementData = async (): Promise<ProductType[]> => {
   try {
     const res = await fetch(
-      "https://api.api-store.workers.dev/api/bazardor/products",
+      "https://openapi.programming-hero.com/api/bazardor/products",
     );
 
     if (res.ok) {

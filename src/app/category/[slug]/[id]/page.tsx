@@ -4,7 +4,7 @@ import { ProductType } from "@/app/Type/Type";
 
 const loadSingleProduct = async (id: string): Promise<ProductType> => {
   const res = await fetch(
-    `https://api.api-store.workers.dev/api/bazardor/products/${id}`,
+    `https://openapi.programming-hero.com/api/bazardor/products/${id}`,
   );
 
   if (!res.ok) {

@@ -4,29 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense, useEffect, useState } from "react";
 import { CategoryType } from "../Type/Type";
-import {
-  Bars3BottomLeftIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/16/solid";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 
 const Header = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState("");
 
   const handleMobileMenu = () => {
     setOpen(!open);
   };
 
-  const currentTime = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
+  useEffect(() => {
+    const currentTimeFunction = new Date().toLocaleDateString("bn-BD", {
+      dateStyle: "full",
+    });
+
+    setCurrentTime(currentTimeFunction);
+  }, []);
 
   useEffect(() => {
     const categoryData = async () => {
       try {
         const res = await fetch(
-          "https://api.api-store.workers.dev/api/bazardor/categories",
+          "https://openapi.programming-hero.com/api/bazardor/categories",
         );
 
         if (!res.ok) {
@@ -75,13 +76,13 @@ const Header = () => {
 
         <div className="action flex items-center">
           <Link
-            href=""
+            href="/login"
             className="px-5 py-2 text-base font-medium lg:inline hidden"
           >
             সাইন ইন
           </Link>
 
-          <Link href="" className="lg:inline hidden">
+          <Link href="/create-account" className="lg:inline hidden">
             <button
               className="bg-green-800 text-base font-medium text-white rounded-md px-5 py-2 shadow-md
               shadow-green-500 cursor-pointer"
@@ -107,11 +108,11 @@ const Header = () => {
         {navLinks}
 
         <div className="lg:hidden flex flex-col">
-          <Link href="" className=" py-2 text-base font-medium">
+          <Link href="/login" className=" py-2 text-base font-medium">
             সাইন ইন
           </Link>
 
-          <Link href="">
+          <Link href="/create-account">
             <button
               className="bg-green-800 text-base font-medium text-white rounded-md px-5 py-2 shadow-md
               shadow-green-500 cursor-pointer"
