@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { redirect } from "next/dist/server/api-utils";
+import { SignUpByGoogle } from "../LoginBySocialmedia";
 
 const SignUpPage = () => {
   const [validation, setValidation] = useState("");
@@ -169,6 +170,7 @@ const SignUpPage = () => {
 
           <div className="flex flex-col sm:flex-row items-stretch gap-3">
             <button
+              onClick={() => SignUpByGoogle()}
               type="button"
               className="border border-gray-300 cursor-pointer rounded-md text-sm sm:text-base flex items-center justify-center py-2 px-3"
             >

@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { SignUpByGoogle } from "../LoginBySocialmedia";
 
 const LoginPage = () => {
   return (
@@ -52,7 +54,10 @@ const LoginPage = () => {
             <span className="absolute w-3/7 top-[50%] bottom-[50%] h-0.5  bg-black right-0"></span>
           </p>
           <div className="flex items-center gap-3">
-            <button className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2">
+            <button
+              onClick={() => SignUpByGoogle()}
+              className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2"
+            >
               <Image
                 className="mr-2"
                 src="/google.png"
