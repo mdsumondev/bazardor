@@ -1,10 +1,33 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { FormHTMLAttributes } from "react";
 import { signInByGithub, SignUpByGoogle } from "../LoginBySocialmedia";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const userData = new FormData(e.currentTarget);
+    const loginInfo = Object.fromEntries(userData.entries());
+    const email = String(userData.get("email") ?? "").trim();
+    const password = String(userData.get("password") ?? "");
+
+    const { data, error } = await signIn.email({
+      email: email,
+      password: password,
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.error(error?.message || "সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    }
+    if (data) {
+      toast.success("সাইন-আপ সম্পন্ন হয়েছে");
+    }
+  };
+
   return (
     <div className="w-screen h-[calc(100vh-160px)] flex justify-center items-center bg-[#E1E8E1]">
       <div>
@@ -14,6 +37,7 @@ const LoginPage = () => {
         </p>
 
         <form
+          onSubmit={handleSignIn}
           action=""
           className="bg-white p-10 max-w-5xl rounded-lg border border-gray-300"
         >
