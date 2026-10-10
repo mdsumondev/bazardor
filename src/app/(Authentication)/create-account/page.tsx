@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { redirect } from "next/dist/server/api-utils";
-import { SignUpByGoogle } from "../LoginBySocialmedia";
+import { signInByGithub, SignUpByGoogle } from "../LoginBySocialmedia";
 
 const SignUpPage = () => {
   const [validation, setValidation] = useState("");
@@ -69,7 +69,7 @@ const SignUpPage = () => {
         window.location.href = "/login";
       }
     } catch (error) {
-      toast.success(`"সমস্যা হয়েছে। আবার চেষ্টা করুন।"`);
+      toast.success("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     } finally {
       setIsLoading(false);
     }
@@ -185,6 +185,7 @@ const SignUpPage = () => {
             </button>
 
             <button
+              onClick={() => signInByGithub()}
               type="button"
               className="border border-gray-300 cursor-pointer rounded-md text-sm sm:text-base flex items-center justify-center py-2 px-3"
             >

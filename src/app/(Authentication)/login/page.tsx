@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { SignUpByGoogle } from "../LoginBySocialmedia";
+import { signInByGithub, SignUpByGoogle } from "../LoginBySocialmedia";
 
 const LoginPage = () => {
   return (
@@ -67,7 +67,10 @@ const LoginPage = () => {
               />
               <span> Google দিয়ে চালিয়ে যান</span>
             </button>
-            <button className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2">
+            <button
+              onClick={() => signInByGithub()}
+              className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2"
+            >
               <Image
                 className="mr-2"
                 src="/github.png"
