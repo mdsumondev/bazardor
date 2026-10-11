@@ -1,4 +1,4 @@
-import { signIn } from "@/lib/auth-client";
+import { signIn, signOut } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
 export const SignUpByGoogle = async () => {
@@ -27,5 +27,17 @@ export const signInByGithub = async () => {
     // }
   } catch (error) {
     toast.error(error?.message);
+  }
+};
+
+export const SignOutMange = async () => {
+  try {
+    const { error } = await signOut();
+
+    if (error) {
+      console.error("Logout failed:", error);
+    }
+  } catch (error) {
+    console.error("Logout failed:", error);
   }
 };
