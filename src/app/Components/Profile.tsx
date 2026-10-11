@@ -46,13 +46,13 @@ const Profile = ({ user }) => {
           <p>{user?.email}</p>
         </div>
         <Link href="/profile" className="text-base font-medium">
-          আমার প্রোফাইল{" "}
+          আমার প্রোফাইল
         </Link>
         <button
           onClick={() => SignOutMange()}
           className="text-red-700 text-base font-medium"
         >
-          লগ আউট
+          ↩ সাইন আউট
         </button>
       </div>
     </div>
