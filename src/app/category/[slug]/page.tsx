@@ -1,4 +1,3 @@
-```tsx
 import { ProductType } from "@/app/Type/Type";
 import React, { Suspense } from "react";
 import CategoryProduct from "@/app/Components/Categories/CategoryProduct";
@@ -110,4 +109,3 @@ export default function CategoryPage({
     </Suspense>
   );
 }
-```
