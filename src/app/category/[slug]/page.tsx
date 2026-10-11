@@ -65,14 +65,14 @@ const CategoryContent = async ({
             </p>
 
             <div className="grid lg:grid-cols-3  grid-cols-1 gap-5">
-              <Suspense>
+            
                 {categoreisproducts.map((productList) => (
                   <CategoryProduct
                     productList={productList}
                     key={productList.id}
                   />
                 ))}
-              </Suspense>
+            
             </div>
           </div>
         </Suspense>
