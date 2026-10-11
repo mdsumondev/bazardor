@@ -4,7 +4,7 @@ import { ProductType } from "@/app/Type/Type";
 
 const loadSingleProduct = async (id: string): Promise<ProductType> => {
   const res = await fetch(
-    `https://openapi.programming-hero.com/api/bazardor/products/${id}`,
+    `https://api.abcz.workers.dev/api/bazardor/products/${id}`,
   );
 
   if (!res.ok) {
@@ -25,11 +25,7 @@ const getUnitName = (unit: string) => {
   return units[unit] ?? unit;
 };
 
-async function ProductDetails({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+async function ProductDetails({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   const product = await loadSingleProduct(id);
@@ -68,9 +64,9 @@ async function ProductDetails({
   const unitName = getUnitName(unit);
 
   return (
-    <div className=" container mx-auto bg-[##E1E8E1] p-4 sm:p-8 md:p-12 flex justify-center ">
-      <div className="">
-        <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+    <div className=" bg-[#E1E8E1] flex justify-center py-5 ">
+      <div className="container mx-auto">
+        <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 mb-5">
           <Link href="/" className="hover:underline">
             হোম
           </Link>
@@ -82,8 +78,7 @@ async function ProductDetails({
           <span className="text-gray-700 font-medium">{nameBn}</span>
         </nav>
 
-        {/* Product Header */}
-        <div className="bg-[#f8fbf8] rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+        <div className="bg-[#f8fbf8] rounded-2xl p-6 sm:p-8 shadow-sm border mb-5 border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
           <div className="flex items-center gap-5">
             <div className=" bg-[#edf2ee] rounded-2xl flex items-center justify-center p-2 shrink-0">
               <span className="text-3xl">{image}</span>
@@ -110,9 +105,8 @@ async function ProductDetails({
             </div>
           </div>
 
-          {/* Today's Price */}
-          <div className="bg-[#edf2ee] rounded-xl p-4 text-center min-w-[140px]  flex sm:flex-col justify-between sm:justify-center items-center">
-            <div className="text-left sm:text-center">
+          <div className=" text-center min-w-[140px]  flex sm:flex-col justify-between sm:justify-center items-center">
+            <div className="text-left sm:text-center bg-white rounded-md mb-5">
               <span className="text-[11px] font-semibold text-gray-500 block">
                 আজকের দাম
               </span>
@@ -142,10 +136,8 @@ async function ProductDetails({
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="bg-[#f8fbf8] rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100 space-y-8">
-          {/* Price Summary */}
-          <section>
+        <div className="">
+          <section className="bg-[#f8fbf8]  rounded-2xl p-6 sm:p-8 shadow-sm mb-5">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               দামের সারসংক্ষেপ
             </h2>
@@ -169,7 +161,6 @@ async function ProductDetails({
                 </p>
               </div>
 
-              {/* Maximum Price */}
               <div className="bg-[#edf2ee]/50 border border-gray-100 rounded-xl p-4 space-y-1.5">
                 <p className="text-xs text-gray-500 font-medium">
                   সর্বোচ্চ দাম
@@ -205,16 +196,15 @@ async function ProductDetails({
             </div>
           </section>
 
-          {/* Marketwise Prices */}
-          <section>
+          <section className="bg-[#f8fbf8]  rounded-2xl p-6 sm:p-8 shadow-sm">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               বাজারভিত্তিক আজকের দাম
             </h2>
 
-            <div className="overflow-x-auto rounded-xl border border-gray-100">
-              <table className="text-left text-sm border-collapse">
+            <div className="">
+              <table className="text-left text-sm w-full border-collapse">
                 <thead>
-                  <tr className="bg-[#edf2ee]/60 text-gray-700 text-xs sm:text-sm font-bold">
+                  <tr className="bg-[#edf2ee]/60 text-gray-700 text-base border-b border-b-gray-600 font-bold">
                     <th className="py-3 px-4">বাজার</th>
                     <th className="py-3 px-4">বিভাগ</th>
                     <th className="py-3 px-4 text-center">সর্বনিম্ন</th>
@@ -227,7 +217,7 @@ async function ProductDetails({
                   {marketData.map((row) => (
                     <tr
                       key={`${row.market}-${row.division}`}
-                      className="hover:bg-[#edf2ee]/40 transition-colors"
+                      className="hover:bg-[#edf2ee]/40 transition-colors border-b border-b-gray-300"
                     >
                       <td className="py-3.5 px-4 font-semibold whitespace-nowrap text-gray-900">
                         {row.market}
@@ -263,14 +253,4 @@ async function ProductDetails({
   );
 }
 
-export default function SingleProducts({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  return (
-    <Suspense fallback={<p>Loading product...</p>}>
-      <ProductDetails params={params} />
-    </Suspense>
-  );
-}
+export default ProductDetails;

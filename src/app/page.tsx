@@ -23,13 +23,15 @@ const allProductsData = async (): Promise<ProductType[]> => {
 export default async function Home() {
   const allProducts = await allProductsData();
 
-  const todayPriceIncrease = allProducts.filter(
-    (product) => product.change.dir === "up",
-  );
+  const todayPriceIncrease = allProducts
+    .filter((product) => product.change.dir === "up")
+    .sort((a, b) => b.change.pct - a.change.pct)
+    .slice(0, 6);
 
-  const todayPriceDecrase = allProducts.filter(
-    (product) => product.change.dir === "down",
-  );
+  const todayPriceDecrase = allProducts
+    .filter((product) => product.change.dir === "down")
+    .sort((a, b) => b.change.pct - a.change.pct)
+    .slice(0, 6);
 
   console.log(todayPriceDecrase);
 
@@ -46,7 +48,7 @@ export default async function Home() {
         </h2>
         <div className="grid lg:grid-cols-3  grid-cols-1 gap-5">
           <Suspense fallback="<h1> Loading... </h1>">
-            {todayPriceIncrease.slice(0, 6).map((productList) => (
+            {todayPriceIncrease.map((productList) => (
               <CategoryProduct key={productList.id} productList={productList} />
             ))}
           </Suspense>
@@ -58,14 +60,14 @@ export default async function Home() {
         </h2>
         <div className="grid lg:grid-cols-3  grid-cols-1 gap-5">
           <Suspense fallback="<h1> Loading... </h1>">
-            {todayPriceDecrase.slice(0, 6).map((productList) => (
+            {todayPriceDecrase.map((productList) => (
               <CategoryProduct key={productList.id} productList={productList} />
             ))}
           </Suspense>
         </div>
       </section>
 
-      <section className="container mx-auto my-10">
+      <section className="container mx-auto my-10" id="allProducts">
         <h2 className="text-2xl font-bold my-1">সব পণ্য</h2>
         <p className="text-base mb-5">
           মোট {allProducts.length}টি পণ্য দেখানো হচ্ছে

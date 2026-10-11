@@ -4,7 +4,7 @@ import CategoryProduct from "@/app/Components/Categories/CategoryProduct";
 
 const categoriesProductsData = async (slug: string): Promise<ProductType[]> => {
   const res = await fetch(
-    `https://openapi.programming-hero.com/api/bazardor/products?category=${slug}`,
+    `https://api.abcz.workers.dev/api/bazardor/products?category=${slug}`,
   );
   if (res.ok) {
     const categoriesWiseProudcts: ProductType[] = await res.json();
@@ -24,6 +24,10 @@ const CategoryContent = async ({
   const categoreisproducts = await categoriesProductsData(slug);
 
   console.log("Categories wise proucts", categoreisproducts);
+
+  const handleSort = (value: string) => {
+    console.log(value);
+  };
 
   return (
     <div className="bg-[#F0F5F0] py-10">
@@ -48,6 +52,7 @@ const CategoryContent = async ({
                 name="sort"
                 id="itemSort"
                 className="border border-b-black rounded-sm px-1 py-2"
+                onChange={(e) => handleSort(e.target.value)}
               >
                 <option value="">ডিফল্ট</option>
                 <option value="low to high">দাম: কম থেকে বেশি</option>
@@ -60,12 +65,14 @@ const CategoryContent = async ({
             </p>
 
             <div className="grid lg:grid-cols-3  grid-cols-1 gap-5">
-              {categoreisproducts.map((productList) => (
-                <CategoryProduct
-                  productList={productList}
-                  key={productList.id}
-                />
-              ))}
+              <Suspense>
+                {categoreisproducts.map((productList) => (
+                  <CategoryProduct
+                    productList={productList}
+                    key={productList.id}
+                  />
+                ))}
+              </Suspense>
             </div>
           </div>
         </Suspense>
@@ -74,14 +81,4 @@ const CategoryContent = async ({
   );
 };
 
-export default function CategoryPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  return (
-    <Suspense fallback={<p>Loading products...</p>}>
-      <CategoryContent params={params} />
-    </Suspense>
-  );
-}
+export default CategoryContent;
