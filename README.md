@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Bazardor (বাজার দর)
 
-## Getting Started
+### A Smarter Way to Track Daily Market Prices in Bangladesh 🇧🇩
 
-First, run the development server:
+**Bazardor** is a web-based grocery price tracking platform designed to help people in Bangladesh explore essential product prices, compare prices across different cities, and track price changes over time.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The goal of this project is to make market price information more accessible and help people make informed shopping decisions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Authentication:** Create an account and sign in securely.
+- **Social Login:** Sign in using Google and GitHub.
+- **Category-Based Products:** Browse grocery products by category.
+- **Price Tracking:** Track price increases and decreases.
+- **City-Wise Price Comparison:** Explore product prices across different cities and markets.
+- **Price History:** Compare current prices with previous day, week, and month prices.
+- **Responsive Design:** Enjoy a smooth experience across desktop, tablet, and mobile devices.
+- **Interactive UI:** Navigate through a clean interface with user-friendly notifications.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Technologies Used
 
-## Learn More
+- **Next.js** — React framework for building the application.
+- **TypeScript** — Type safety and reliable code.
+- **Tailwind CSS** — Responsive and modern UI styling.
+- **Better Auth** — User authentication and social login.
+- **React Toastify** — Toast notifications and user feedback.
+- **Heroicons** — Clean and consistent icons.
 
-To learn more about Next.js, take a look at the following resources:
+## 🚧 Challenges & Learnings
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+One of the biggest challenges I faced while building Bazardor was **deploying the application successfully**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+My initial deployment attempts failed several times due to different errors. Instead of giving up, I carefully read the error messages, investigated the underlying issues, and fixed them step by step.
 
-## Deploy on Vercel
+Most of the errors were related to TypeScript, including type definitions, type compatibility, and build-time checks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Through this experience, I learned how to:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Debug TypeScript errors more effectively.
+- Identify and resolve production build errors.
+- Troubleshoot deployment issues.
+- Handle authentication in a Next.js application.
+- Solve problems independently through debugging and research.
+
+This project helped me understand that building an application is not just about writing code; it is also about solving problems and making the application work reliably in production.

@@ -14,7 +14,7 @@ const categoriesProductsData = async (slug: string): Promise<ProductType[]> => {
   throw new Error("data not found");
 };
 
-const CategoryPage = async ({
+const CategoryContent = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -74,4 +74,14 @@ const CategoryPage = async ({
   );
 };
 
-export default CategoryPage;
+export default function CategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  return (
+    <Suspense fallback={<p>Loading products...</p>}>
+      <CategoryContent params={params} />
+    </Suspense>
+  );
+}

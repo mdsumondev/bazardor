@@ -13,7 +13,7 @@ interface Market {
 }
 
 interface Change {
-  dir: "up" | "down";
+  dir: "up" | "down" | "flat";
   pct: number;
 }
 

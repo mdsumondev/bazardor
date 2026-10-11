@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { ProductType } from "@/app/Type/Type";
 
@@ -25,7 +25,7 @@ const getUnitName = (unit: string) => {
   return units[unit] ?? unit;
 };
 
-export default async function SingleProducts({
+async function ProductDetails({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -260,5 +260,17 @@ export default async function SingleProducts({
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SingleProducts({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  return (
+    <Suspense fallback={<p>Loading product...</p>}>
+      <ProductDetails params={params} />
+    </Suspense>
   );
 }
