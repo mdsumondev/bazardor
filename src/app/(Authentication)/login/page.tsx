@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FormHTMLAttributes } from "react";
+import React from "react";
 import { signInByGithub, SignUpByGoogle } from "../LoginBySocialmedia";
 import { signIn } from "@/lib/auth-client";
 import { toast } from "react-toastify";
@@ -10,7 +10,6 @@ const LoginPage = () => {
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userData = new FormData(e.currentTarget);
-    const loginInfo = Object.fromEntries(userData.entries());
     const email = String(userData.get("email") ?? "").trim();
     const password = String(userData.get("password") ?? "");
 
@@ -20,11 +19,13 @@ const LoginPage = () => {
       rememberMe: true,
       callbackURL: "/",
     });
+
     if (error) {
       toast.error(error?.message || "সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     }
+
     if (data) {
-      toast.success("সাইন-আপ সম্পন্ন হয়েছে");
+      toast.success("সাইন-ইন সম্পন্ন হয়েছে");
     }
   };
 
@@ -38,7 +39,6 @@ const LoginPage = () => {
 
         <form
           onSubmit={handleSignIn}
-          action=""
           className="bg-white p-10 max-w-5xl rounded-lg border border-gray-300"
         >
           <div className="flex flex-col mb-5">
@@ -53,6 +53,7 @@ const LoginPage = () => {
               id="email"
             />
           </div>
+
           <div className="flex flex-col mb-5">
             <label htmlFor="password" className="text-lg mb-1">
               পাসওয়ার্ড
@@ -65,20 +66,24 @@ const LoginPage = () => {
               id="password"
             />
           </div>
+
           <button
             type="submit"
             className="bg-green-800 text-base font-medium block w-full mb-5 text-white rounded-md px-5 py-2 shadow-md
               shadow-green-500 cursor-pointer"
           >
-            সাইন আপ
+            সাইন ইন
           </button>
+
           <p className="text-center relative my-3">
             অথবা
-            <span className="absolute w-3/7 top-[50%] bottom-[50%] h-0.5  bg-black left-0"></span>
-            <span className="absolute w-3/7 top-[50%] bottom-[50%] h-0.5  bg-black right-0"></span>
+            <span className="absolute w-3/7 top-[50%] bottom-[50%] h-0.5 bg-black left-0"></span>
+            <span className="absolute w-3/7 top-[50%] bottom-[50%] h-0.5 bg-black right-0"></span>
           </p>
+
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => SignUpByGoogle()}
               className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2"
             >
@@ -91,7 +96,9 @@ const LoginPage = () => {
               />
               <span> Google দিয়ে চালিয়ে যান</span>
             </button>
+
             <button
+              type="button"
               onClick={() => signInByGithub()}
               className="border border-gray-300 cursor-pointer rounded-md text-base flex items-center py-1 px-2"
             >
@@ -113,6 +120,7 @@ const LoginPage = () => {
             </Link>
           </p>
         </form>
+
         <Link href="/" className="text-base block text-center mt-4">
           ← হোম পেজে ফিরে যান
         </Link>

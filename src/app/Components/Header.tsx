@@ -5,11 +5,15 @@ import Link from "next/link";
 import React, { Suspense, useEffect, useState } from "react";
 import { CategoryType } from "../Type/Type";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
+import { useSession } from "@/lib/auth-client";
+import Profile from "./Profile";
 
 const Header = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState("");
+
+  const { data: seasion } = useSession();
 
   const handleMobileMenu = () => {
     setOpen(!open);
@@ -27,7 +31,7 @@ const Header = () => {
     const categoryData = async () => {
       try {
         const res = await fetch(
-          "https://openapi.programming-hero.com/api/bazardor/categories",
+          "https://api.abcz.workers.dev/api/bazardor/categories",
         );
 
         if (!res.ok) {
@@ -73,31 +77,36 @@ const Header = () => {
             </div>
           </Link>
         </div>
+        <div>
+          {seasion?.user ? (
+            <Profile user={seasion?.user} />
+          ) : (
+            <div className="action flex items-center">
+              <Link
+                href="/login"
+                className="px-5 py-2 text-base font-medium lg:inline hidden"
+              >
+                সাইন ইন
+              </Link>
 
-        <div className="action flex items-center">
-          <Link
-            href="/login"
-            className="px-5 py-2 text-base font-medium lg:inline hidden"
-          >
-            সাইন ইন
-          </Link>
-
-          <Link href="/create-account" className="lg:inline hidden">
-            <button
-              className="bg-green-800 text-base font-medium text-white rounded-md px-5 py-2 shadow-md
+              <Link href="/create-account" className="lg:inline hidden">
+                <button
+                  className="bg-green-800 text-base font-medium text-white rounded-md px-5 py-2 shadow-md
               shadow-green-500 cursor-pointer"
-            >
-              সাইন আপ
-            </button>
-          </Link>
+                >
+                  সাইন আপ
+                </button>
+              </Link>
 
-          <div className="lg:hidden" onClick={handleMobileMenu}>
-            {open ? (
-              <XMarkIcon className="size-8 " />
-            ) : (
-              <Bars3Icon className="size-8 " />
-            )}
-          </div>
+              <div className="lg:hidden" onClick={handleMobileMenu}>
+                {open ? (
+                  <XMarkIcon className="size-8 " />
+                ) : (
+                  <Bars3Icon className="size-8 " />
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

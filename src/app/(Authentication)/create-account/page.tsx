@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { redirect } from "next/dist/server/api-utils";
 import { signInByGithub, SignUpByGoogle } from "../LoginBySocialmedia";
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [validation, setValidation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -66,9 +67,9 @@ const SignUpPage = () => {
       }
       if (data) {
         toast.success("সাইন-আপ সম্পন্ন হয়েছে");
-        window.location.href = "/login";
+        router.push("/login");
       }
-    } catch (error) {
+    } catch {
       toast.success("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     } finally {
       setIsLoading(false);

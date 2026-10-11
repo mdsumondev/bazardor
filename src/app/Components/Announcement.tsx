@@ -6,7 +6,12 @@ import Marquee from "react-fast-marquee";
 const loadAnnouncementData = async (): Promise<ProductType[]> => {
   try {
     const res = await fetch(
-      "https://openapi.programming-hero.com/api/bazardor/products",
+      "https://api.abcz.workers.dev/api/bazardor/products",
+      {
+        next: {
+          revalidate: 60,
+        },
+      },
     );
 
     if (res.ok) {
@@ -45,20 +50,20 @@ const Announcement = async () => {
                 </p>
                 <p>
                   {product.change.dir === "up" ? (
-                    <p className="text-red-500">
+                    <span className="text-red-500">
                       <span>▲</span>
                       <span>{product.change.pct}%</span>
-                    </p>
+                    </span>
                   ) : product.change.dir === "flat" ? (
-                    <p className="text-black">
+                    <span className="text-black">
                       <span className="text-lg font-medium pr-1">-</span>
                       <span>{product.change.pct}%</span>
-                    </p>
+                    </span>
                   ) : (
-                    <p className="text-green-800">
+                    <span className="text-green-800">
                       <span>▼</span>
                       <span>{product.change.pct}%</span>
-                    </p>
+                    </span>
                   )}
                 </p>
               </div>
