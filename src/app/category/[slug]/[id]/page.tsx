@@ -42,7 +42,7 @@ export default async function SingleProducts({
     unit,
     change,
     markets,
-    categoryBn,
+    categoryNameBn,
     slug,
   } = product;
 
@@ -76,7 +76,7 @@ export default async function SingleProducts({
           </Link>
           <span>&gt;</span>
           <Link href={slug} className="hover:underline">
-            {categoryBn ?? "চাল"}
+            {categoryNameBn ?? "চাল"}
           </Link>
           <span>&gt;</span>
           <span className="text-gray-700 font-medium">{nameBn}</span>

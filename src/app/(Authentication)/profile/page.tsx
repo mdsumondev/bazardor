@@ -23,7 +23,9 @@ const ProfilePage = () => {
       toast.success("নাম পরিবর্তন করা হয়েছে");
     }
     if (error) {
-      toast.error(error.message);
+      toast.error(
+        error instanceof Error ? error.message : "কিছু একটা সমস্যা হয়েছে",
+      );
     }
   };
 
@@ -47,7 +49,7 @@ const ProfilePage = () => {
                 ></Image>
               ) : (
                 <p className="text-xl bg-green-700 font-bold text-white px-3 py-2 rounded-full">
-                  {seasion?.user?.name.charAt()}
+                  {seasion?.user?.name.charAt(0)}
                 </p>
               )}
             </div>

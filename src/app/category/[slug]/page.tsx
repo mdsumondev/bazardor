@@ -1,26 +1,24 @@
 import { ProductType } from "@/app/Type/Type";
-import { error } from "console";
-import Image from "next/image";
 import React, { Suspense } from "react";
-import NavItem from "./../../Components/NavItem";
 import CategoryProduct from "@/app/Components/Categories/CategoryProduct";
 
 const categoriesProductsData = async (slug: string): Promise<ProductType[]> => {
-  try {
-    const res = await fetch(
-      `https://openapi.programming-hero.com/api/bazardor/products?category=${slug}`,
-    );
-    if (res.ok) {
-      const categoriesWiseProudcts = await res.json();
-      return categoriesWiseProudcts;
-    }
-    throw new Error("data not found");
-  } catch {
-    console.log(error);
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/bazardor/products?category=${slug}`,
+  );
+  if (res.ok) {
+    const categoriesWiseProudcts: ProductType[] = await res.json();
+    return categoriesWiseProudcts;
   }
+
+  throw new Error("data not found");
 };
 
-const CategoryPage = async ({ params }: Promise<string | number>) => {
+const CategoryPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
   const { slug } = await params;
 
   const categoreisproducts = await categoriesProductsData(slug);

@@ -62,7 +62,9 @@ const SignUpPage = () => {
       });
 
       if (error) {
-        toast.error(`${error?.message}`);
+        toast.error(
+          error instanceof Error ? error.message : "কিছু একটা সমস্যা হয়েছে",
+        );
         return;
       }
       if (data) {

@@ -21,7 +21,9 @@ const LoginPage = () => {
     });
 
     if (error) {
-      toast.error(error?.message || "সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+      toast.error(
+        error instanceof Error ? error.message : "কিছু একটা সমস্যা হয়েছে",
+      );
     }
 
     if (data) {

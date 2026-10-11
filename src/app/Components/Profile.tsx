@@ -1,14 +1,16 @@
 "use client";
-import { useSession } from "@/lib/auth-client";
-import { date } from "better-auth";
 import Image from "next/image";
 import React, { useState } from "react";
-import { names } from "./../../../.next/dev/server/chunks/node_modules_next_dist_06k_3_1o-9fwv._";
 import Link from "next/link";
 import { SignOutMange } from "../(Authentication)/LoginBySocialmedia";
-import { router } from "better-auth/api";
 
-const Profile = ({ user }) => {
+type ProfileUser = {
+  name: string;
+  email: string;
+  image?: string | null;
+};
+
+const Profile = ({ user }: { user: ProfileUser }) => {
   const [openProfile, setOpenProfile] = useState(false);
 
   const handleProfile = () => {
@@ -31,7 +33,7 @@ const Profile = ({ user }) => {
             ></Image>
           ) : (
             <p className="text-xl bg-green-700 font-bold text-white px-3 py-2 rounded-full">
-              {user.name.charAt()}
+              {user.name.charAt(0)}
             </p>
           )}
         </div>

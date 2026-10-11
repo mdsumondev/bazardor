@@ -1,6 +1,5 @@
 import React from "react";
 import { ProductType } from "@/app/Type/Type";
-import { DivideIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 
 const CategoryProduct = ({ productList }: { productList: ProductType }) => {
@@ -29,8 +28,8 @@ const CategoryProduct = ({ productList }: { productList: ProductType }) => {
                 <span>{productList.change.pct}%</span>
               </p>
             ) : productList.change.dir === "flat" ? (
-              <p className="text-black">
-                <span className="text-lg font-medium pr-1">-</span>
+              <p className="text-gray-500">
+                <span>—</span>
                 <span>{productList.change.pct}%</span>
               </p>
             ) : (

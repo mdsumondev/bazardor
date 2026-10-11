@@ -1,29 +1,23 @@
-import Image from "next/image";
 import Hero from "./Components/Home/Hero";
-import { promises } from "dns";
 import { ProductType } from "./Type/Type";
-import { error } from "console";
 import { Suspense } from "react";
 import CategoryProduct from "./Components/Categories/CategoryProduct";
 
-const allProductsData = async (): promises<ProductType[]> => {
-  try {
-    const res = await fetch(
-      "https://api.abcz.workers.dev/api/bazardor/products",
-      {
-        next: {
-          revalidate: 60,
-        },
+const allProductsData = async (): Promise<ProductType[]> => {
+  const res = await fetch(
+    "https://api.abcz.workers.dev/api/bazardor/products",
+    {
+      next: {
+        revalidate: 60,
       },
-    );
-    if (res.ok) {
-      const productData = await res.json();
-      return productData;
-    }
-    throw new Error("Something going wrong");
-  } catch {
-    console.log(error);
+    },
+  );
+  if (res.ok) {
+    const productData: ProductType[] = await res.json();
+    return productData;
   }
+
+  throw new Error("Something going wrong");
 };
 
 export default async function Home() {

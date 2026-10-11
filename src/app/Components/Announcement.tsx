@@ -1,32 +1,28 @@
-import { error } from "console";
 import React, { Suspense } from "react";
 import { ProductType } from "../Type/Type";
 import Marquee from "react-fast-marquee";
 
 const loadAnnouncementData = async (): Promise<ProductType[]> => {
-  try {
-    const res = await fetch(
-      "https://api.abcz.workers.dev/api/bazardor/products",
-      {
-        next: {
-          revalidate: 60,
-        },
+  const res = await fetch(
+    "https://api.abcz.workers.dev/api/bazardor/products",
+    {
+      next: {
+        revalidate: 60,
       },
-    );
+    },
+  );
 
-    if (res.ok) {
-      const data = await res.json();
-      return data.slice(0, 10);
-    }
-
-    throw new Error("Something going wrong");
-  } catch {
-    console.log(error);
+  if (res.ok) {
+    const data: ProductType[] = await res.json();
+    return data.slice(0, 10);
   }
+
+  throw new Error("Something going wrong");
 };
 
-const Announcement = async () => {
+const Announcement = async (): Promise<React.JSX.Element> => {
   const products = await loadAnnouncementData();
+
   return (
     <div className="border border-t-gray-300 border-b-gray-300 py-2 ">
       <Suspense>
@@ -55,8 +51,8 @@ const Announcement = async () => {
                       <span>{product.change.pct}%</span>
                     </span>
                   ) : product.change.dir === "flat" ? (
-                    <span className="text-black">
-                      <span className="text-lg font-medium pr-1">-</span>
+                    <span className="text-gray-500">
+                      <span>—</span>
                       <span>{product.change.pct}%</span>
                     </span>
                   ) : (
